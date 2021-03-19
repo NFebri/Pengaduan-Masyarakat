@@ -58,7 +58,7 @@ class AuthController extends Controller
             'username' => 'required',
             'email' => 'required|unique:users',
             'telp' => 'required|numeric',
-            'password' => 'required',
+            'password' => 'required_with:password_confirmation|confirmed',
         ]);
         User::create([
             'nik' => $request->nik,

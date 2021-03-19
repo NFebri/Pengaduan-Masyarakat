@@ -81,6 +81,18 @@
                         </div>
                     </div>
 
+                    <div class="mb-3 row">
+                        <label for="password_confirmation" class="col-sm-2 col-form-label">Confirm Password</label>
+                        <div class="col-sm-10">
+                            <input type="password" name="password_confirmation" class="form-control @error('password_confirmation')is-invalid @enderror" id="password_confirmation" required>
+                            @error('password_confirmation')
+                            <div class="invalid-feedback">
+                                {{ $message }}
+                            </div>
+                            @enderror
+                        </div>
+                    </div>
+
                     <button type="submit" class="btn btn-primary">register</button>
                 </form>
             </div>
