@@ -26,7 +26,6 @@ class UserSeeder extends Seeder
             'name' => 'Petugas',
             'username' => 'petugas',
             'email' => 'petugas@user.com',
-            'telp' => '12345678901',
             'password' => bcrypt('petugas123'),
             'role' => 'petugas',
         ]);
@@ -36,6 +35,7 @@ class UserSeeder extends Seeder
             'name' => 'User',
             'username' => 'user',
             'email' => 'user@user.com',
+            'telp' => '12345678901',
             'password' => bcrypt('user123'),
             'role' => 'user',
         ]);
