@@ -24,15 +24,21 @@
                         <th scope="row">{{ $loop->iteration }}</th>
                         <td>{{ $item->judul }}</td>
                         <td>
-                            @if ($item->status === 'pending')
-                                <span class="badge bg-warning">pending</span>
+                            @if ($item->status === '0')
+                                <span class="badge bg-danger">belum diproses</span>
                             @endif
-                            @if ($item->status === 'ditanggapi')
-                                <span class="badge bg-info">ditanggapi</span>
+                            @if ($item->status === 'proses')
+                                <span class="badge bg-warning">proses</span>
+                            @endif
+                            @if ($item->status === 'selesai')
+                                <span class="badge bg-success">selssai</span>
                             @endif
                         </td>
-                        <td>
+                        <td class="d-flex">
                             <a href="{{ route('complaint.show', Crypt::Encrypt($item->id)) }}" class="btn btn-sm btn-primary">Detail</a>
+                            @if ($item->status === 'proses')
+                            <a href="{{ route('complaint.setstatus', $item->id) }}" class="btn btn-sm btn-success">terima</a>
+                            @endif
                         </td>
                     </tr>
                 @empty

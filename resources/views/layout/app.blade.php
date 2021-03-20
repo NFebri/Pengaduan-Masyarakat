@@ -22,7 +22,6 @@
                     <div class="navbar-nav">
                         @guest
                             <a class="nav-link" href="{{ route('home') }}">Home</a>
-                            <a class="nav-link" href="{{ route('pengaduan') }}">Pengaduan</a>
                         @endguest
                         @auth
                             @if (Auth::user()->role === 'admin' || Auth::user()->role === 'petugas')

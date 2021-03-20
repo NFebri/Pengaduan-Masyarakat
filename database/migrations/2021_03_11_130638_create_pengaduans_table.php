@@ -19,7 +19,7 @@ class CreatePengaduansTable extends Migration
             $table->string('judul');
             $table->text('isi_laporan');
             $table->string('foto')->nullable();
-            $table->enum('status', ['pending', 'ditanggapi']);
+            $table->enum('status', ['0','proses', 'selesai']);
             $table->timestamps();
         });
     }

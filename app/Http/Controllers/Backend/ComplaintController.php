@@ -35,7 +35,7 @@ class ComplaintController extends Controller
             'tanggapan' => 'required',
         ]);
         Pengaduan::where(['id' => $id])->update([
-            'status' => 'ditanggapi',
+            'status' => 'proses',
         ]);
         tanggapan::create([
             'pengaduan_id' => $id,
@@ -43,5 +43,13 @@ class ComplaintController extends Controller
             'user_id' => auth()->id(),
         ]);
         return redirect(route('complaint'))->with('status', 'Pengaduan berhasil ditanggapi');
+    }
+
+    public function setStatus($id)
+    {
+        Pengaduan::findOrfail($id)->update([
+            'status' => 'selesai',
+        ]);
+        return redirect(route('complaint'))->with('status', 'Status pengaduan berhasil diubah');
     }
 }

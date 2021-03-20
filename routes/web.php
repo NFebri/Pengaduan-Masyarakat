@@ -28,18 +28,19 @@ Route::get('/register', [AuthController::class, 'register'])->name('register');
 Route::post('/register', [AuthController::class, 'prosesRegister'])->name('proses.register');
 
 Route::get('/', [PengaduanController::class, 'index'])->name('home');
-Route::get('/pengaduan', [PengaduanController::class, 'pengaduan'])->name('pengaduan');
-Route::get('/pengaduan/{id}', [PengaduanController::class, 'show'])->name('pengaduan.show');
-Route::post('/cari-pengaduan', [PengaduanController::class, 'searchHandle'])->name('pengaduan.search');
 
 Route::group(['middleware' => ['auth', 'rolecheck:admin,petugas']], function() {
     Route::get('admin', [DashboardController::class, 'index'])->name('admin');
     Route::get('/admin/pengaduan', [ComplaintController::class, 'index'])->name('complaint');
     Route::get('/admin/pengaduan/{id}', [ComplaintController::class, 'show'])->name('complaint.show');
     Route::post('/admin/pengaduan/{id}', [ComplaintController::class, 'tanggapanHandle'])->name('complaint.tanggapan');
+    Route::get('/admin/pengaduan/{id}/setStatus', [ComplaintController::class, 'setStatus'])->name('complaint.setstatus');
 });
 
 Route::group(['middleware' => ['auth', 'rolecheck:user']], function() {
+    Route::get('/pengaduan', [PengaduanController::class, 'pengaduan'])->name('pengaduan');
+    Route::post('/cari-pengaduan', [PengaduanController::class, 'searchHandle'])->name('pengaduan.search');
     Route::get('/pengaduan/create', [PengaduanController::class, 'create'])->name('pengaduan.create');
     Route::post('/pengaduan/create', [PengaduanController::class, 'store'])->name('pengaduan.store');
+    Route::get('/pengaduan/{id}', [PengaduanController::class, 'show'])->name('pengaduan.show');
 });

@@ -24,7 +24,7 @@ class PengaduanController extends Controller
         Paginator::useBootstrap();
         $data = [
             'title' => 'Pengaduan',
-            'pengaduan' => Pengaduan::latest()->paginate(5),
+            'pengaduan' => Pengaduan::where('user_id', auth()->id())->latest()->paginate(5),
         ];
         return view('frontend.pengaduan', $data);
     }
@@ -51,7 +51,7 @@ class PengaduanController extends Controller
             'judul' => $request->judul,
             'isi_laporan' => $request->isi_laporan,
             'foto' => $berkas,
-            'status' => 'pending'
+            'status' => '0',
         ]);
         return redirect(route('pengaduan'))->with('status', 'Pengaduan berhasil dibuat');
     }

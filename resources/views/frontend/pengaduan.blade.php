@@ -23,11 +23,14 @@
                     <span>{{ $item->created_at->format('d/m/y') }}</span>
                     <h5 class="card-title"><a href="{{ route('pengaduan.show', Crypt::encrypt( $item->id)) }}">{{ $item->judul }}</a></h5>
                     <p class="card-text">{{ strip_tags(Str::limit($item->isi_laporan, 200)) }}</p>
-                    @if ($item->status === 'pending')
-                        <button class="btn btn-sm btn-warning" disabled>pending</button>
+                    @if ($item->status === '0')
+                        <button class="btn btn-sm btn-danger" disabled>belum diproses</button>
                     @endif
-                    @if ($item->status === 'ditanggapi')
-                        <button class="btn btn-sm btn-info" disabled>ditanggapi</button>
+                    @if ($item->status === 'proses')
+                        <button class="btn btn-sm btn-warning" disabled>proses</button>
+                    @endif
+                    @if ($item->status === 'selesai')
+                        <button class="btn btn-sm btn-success" disabled>selesai</button>
                     @endif
                 </div>
             </div>
