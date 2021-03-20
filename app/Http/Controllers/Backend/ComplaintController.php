@@ -7,6 +7,7 @@ use App\Models\Pengaduan;
 use App\Models\tanggapan;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Crypt;
+use Barryvdh\DomPDF\Facade as PDF;
 
 class ComplaintController extends Controller
 {
@@ -51,5 +52,13 @@ class ComplaintController extends Controller
             'status' => 'selesai',
         ]);
         return redirect(route('complaint'))->with('status', 'Status pengaduan berhasil diubah');
+    }
+
+    public function generatePDF($id)
+    {
+        $pengaduan = Pengaduan::findOrfail($id);
+        $laporan = $pengaduan->judul . '-' . $pengaduan->status;
+        $pdf = PDF::loadview('backend.pengaduan.generate', ['pengaduan' => $pengaduan]);
+        return $pdf->download($laporan);
     }
 }

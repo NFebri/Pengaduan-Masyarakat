@@ -37,6 +37,8 @@ Route::group(['middleware' => ['auth', 'rolecheck:admin,petugas']], function() {
     Route::get('/admin/pengaduan/{id}/setStatus', [ComplaintController::class, 'setStatus'])->name('complaint.setstatus');
 });
 
+Route::get('/admin/pengaduan/{id}/generate', [ComplaintController::class, 'generatePDF'])->middleware('auth', 'rolecheck:admin')->name('complaint.generate');
+
 Route::group(['middleware' => ['auth', 'rolecheck:user']], function() {
     Route::get('/pengaduan', [PengaduanController::class, 'pengaduan'])->name('pengaduan');
     Route::post('/cari-pengaduan', [PengaduanController::class, 'searchHandle'])->name('pengaduan.search');

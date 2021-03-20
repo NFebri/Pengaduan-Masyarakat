@@ -34,15 +34,22 @@
                                 <span class="badge bg-success">selssai</span>
                             @endif
                         </td>
-                        <td class="d-flex">
+                        <td class="d-grid gap-2 d-md-block">
                             <a href="{{ route('complaint.show', Crypt::Encrypt($item->id)) }}" class="btn btn-sm btn-primary">Detail</a>
+                            @if (Auth::user()->role === 'admin')
+                            <a href="{{ route('complaint.generate', $item->id) }}" class="btn btn-sm btn-dark">Print</a>
+                            @endif
                             @if ($item->status === 'proses')
                             <a href="{{ route('complaint.setstatus', $item->id) }}" class="btn btn-sm btn-success">terima</a>
                             @endif
                         </td>
                     </tr>
                 @empty
-                    
+                    <tr>
+                        <td colspan="4">
+                            <span class="text-center">Data pengaduan tidak ada</span>
+                        </td>
+                    </tr>
                 @endforelse
             </tbody>
         </table>
