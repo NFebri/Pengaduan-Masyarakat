@@ -27,6 +27,7 @@
                             @if (Auth::user()->role === 'admin' || Auth::user()->role === 'petugas')
                                 <a class="nav-link" href="{{ route('admin') }}">Admin</a>
                                 <a class="nav-link" href="{{ route('complaint') }}">Pengaduan</a>
+                                <a class="nav-link" href="{{ route('admin.user') }}">Users</a>
                             @endif
                             @if (Auth::user()->role === 'user')
                                 <a class="nav-link" href="{{ route('home') }}">Home</a>

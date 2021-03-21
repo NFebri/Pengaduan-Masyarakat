@@ -71,4 +71,28 @@ class AuthController extends Controller
         ]);
         return redirect(route('login'))->with('status', 'akun berhasil dibuat');
     }
+
+    public function adminRegister()
+    {
+        return view('backend.user.create', ['title' => 'Register']);
+    }
+
+    public function handleAdminRegister(Request $request)
+    {
+        $request->validate([
+            'name' => 'required',
+            'username' => 'required',
+            'email' => 'required|unique:users',
+            'role' => 'required',
+            'password' => 'required_with:password_confirmation|confirmed',
+        ]);
+        User::create([
+            'name' => $request->name,
+            'username' => $request->username,
+            'email' => $request->email,
+            'password' => Hash::make($request->password),
+            'role' => $request->role,
+        ]);
+        return redirect(route('admin.user'))->with('status', 'akun berhasil dibuat');
+    }
 }
